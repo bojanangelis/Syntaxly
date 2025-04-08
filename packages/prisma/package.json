@@ -4,9 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "migrate": "dotenv -e ../../.env.local -- prisma migrate dev",
+    "generate": "dotenv -e ../../.env.local -- prisma generate",
+    "seed": "dotenv -e ../../.env.local -- ts-node seed.ts",
     "prisma": "prisma",
-    "migrate": "dotenv -e ../../.env -- prisma migrate dev",
-    "generate": "dotenv -e ../../.env -- prisma generate",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -18,5 +19,8 @@
   "devDependencies": {
     "dotenv-cli": "^8.0.0",
     "prisma": "^6.6.0"
+  },
+  "exports": {
+    ".": "./index.ts"
   }
 }

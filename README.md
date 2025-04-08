@@ -46,7 +46,7 @@ pnpm dev
 This starts:
 
 - `web` on http://localhost:3000
-- `api` on http://localhost:3001
+- `api` on http://localhost:4200
 
 ### 4. Migrate & seed database
 

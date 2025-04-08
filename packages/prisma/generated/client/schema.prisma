@@ -50,10 +50,10 @@ model Task {
   lesson   Lesson   @relation(fields: [lessonId], references: [id])
   lessonId String
   type     TaskType
-  prompt   String // The question/instruction
-  options  String[] // For MCQ (optional for others)
-  answer   String // Expected answer or regex
-  order    Int // Task order in lesson
+  prompt   String
+  options  String[]
+  answer   String
+  order    Int
 }
 
 model LessonProgress {
