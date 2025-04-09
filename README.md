@@ -63,6 +63,7 @@ Located in: `packages/prisma`
 
 - Contains `schema.prisma`
 - Runs migrations and generates the Prisma client
+
 - Can be shared across apps
 
 Uses PostgreSQL via Docker (`localhost:5432`) with default creds:
