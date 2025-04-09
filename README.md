@@ -51,8 +51,8 @@ This starts:
 ### 4. Migrate & seed database
 
 ```bash
-pnpm --filter @repo/prisma migrate
-pnpm --filter @repo/prisma seed
+pnpm --filter @syntaxly/prisma migrate
+pnpm --filter @syntaxly/prisma seed
 ```
 
 ---

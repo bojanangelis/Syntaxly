@@ -1,12 +1,12 @@
 {
-  "name": "with-tailwind",
+  "name": "Syntaxly",
   "private": true,
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev",
     "lint": "turbo run lint",
     "clean": "rm -rf node_modules .turbo && pnpm install",
-    "seed": "pnpm --filter @repo/prisma seed",
+    "seed": "pnpm --filter @syntaxly/prisma seed",
     "check-types": "turbo run check-types",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
