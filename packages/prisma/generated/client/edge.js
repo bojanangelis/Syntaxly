@@ -194,7 +194,8 @@ const config = {
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": null
+    "rootEnvPath": null,
+    "schemaEnvPath": "../../.env"
   },
   "relativePath": "../..",
   "clientVersion": "6.6.0",
@@ -203,16 +204,17 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
+  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": "postgresql://postgres:postgres@localhost:5432/codelearn"
+        "value": null
       }
     }
   },
-  "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"./generated/client\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  id        String           @id @default(uuid())\n  email     String           @unique\n  name      String?\n  xp        Int              @default(0)\n  createdAt DateTime         @default(now())\n  updatedAt DateTime         @updatedAt\n  progress  LessonProgress[]\n}\n\nmodel Language {\n  id        String   @id @default(uuid())\n  name      String   @unique\n  topics    Topic[]\n  createdAt DateTime @default(now())\n}\n\nmodel Topic {\n  id         String   @id @default(uuid())\n  title      String\n  language   Language @relation(fields: [languageId], references: [id])\n  languageId String\n  lessons    Lesson[]\n  createdAt  DateTime @default(now())\n}\n\nmodel Lesson {\n  id        String           @id @default(uuid())\n  title     String\n  content   String\n  topic     Topic            @relation(fields: [topicId], references: [id])\n  topicId   String\n  tasks     Task[]\n  progress  LessonProgress[]\n  createdAt DateTime         @default(now())\n}\n\nmodel Task {\n  id       String   @id @default(uuid())\n  lesson   Lesson   @relation(fields: [lessonId], references: [id])\n  lessonId String\n  type     TaskType\n  prompt   String\n  options  String[]\n  answer   String\n  order    Int\n}\n\nmodel LessonProgress {\n  id          String    @id @default(uuid())\n  user        User      @relation(fields: [userId], references: [id])\n  userId      String\n  lesson      Lesson    @relation(fields: [lessonId], references: [id])\n  lessonId    String\n  completed   Boolean   @default(false)\n  completedAt DateTime?\n}\n\nenum TaskType {\n  MULTIPLE_CHOICE\n  FILL_IN_THE_BLANK\n  WRITE_CODE\n}\n",
-  "inlineSchemaHash": "941d4471825f455db21045a18416401ee53de79fc85075ad31d3ba59060496c7",
+  "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"./generated/client\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\ngenerator nestgraphql {\n  provider             = \"node node_modules/prisma-nestjs-graphql\"\n  output               = \"../db-generated-types/src\"\n  purgeOutput          = true\n  emitSingle           = true\n  combineScalarFilters = true\n  noAtomicOperations   = true\n\n  // Validation decorators\n  fields_Validator_input  = true\n  fields_Validator_output = true\n  fields_Validator_model  = true\n  fields_Validator_from   = \"class-validator\"\n\n  // For args | where | nested\n  decorate_1_type      = \"*Args\"\n  decorate_1_field     = \"@(data|where)\"\n  decorate_1_name      = \"ValidateNested\"\n  decorate_1_from      = \"class-validator\"\n  decorate_1_arguments = \"[]\"\n}\n\nmodel User {\n  id        String           @id @default(uuid())\n  email     String           @unique\n  name      String?\n  xp        Int              @default(0)\n  createdAt DateTime         @default(now())\n  updatedAt DateTime         @updatedAt\n  progress  LessonProgress[]\n}\n\nmodel Language {\n  id        String   @id @default(uuid())\n  name      String   @unique\n  topics    Topic[]\n  createdAt DateTime @default(now())\n}\n\nmodel Topic {\n  id         String   @id @default(uuid())\n  title      String\n  language   Language @relation(fields: [languageId], references: [id])\n  languageId String\n  lessons    Lesson[]\n  createdAt  DateTime @default(now())\n}\n\nmodel Lesson {\n  id        String           @id @default(uuid())\n  title     String\n  content   String\n  topic     Topic            @relation(fields: [topicId], references: [id])\n  topicId   String\n  tasks     Task[]\n  progress  LessonProgress[]\n  createdAt DateTime         @default(now())\n}\n\nmodel Task {\n  id       String   @id @default(uuid())\n  lesson   Lesson   @relation(fields: [lessonId], references: [id])\n  lessonId String\n  type     TaskType\n  prompt   String\n  options  String[]\n  answer   String\n  order    Int\n}\n\nmodel LessonProgress {\n  id          String    @id @default(uuid())\n  user        User      @relation(fields: [userId], references: [id])\n  userId      String\n  lesson      Lesson    @relation(fields: [lessonId], references: [id])\n  lessonId    String\n  completed   Boolean   @default(false)\n  completedAt DateTime?\n}\n\nenum TaskType {\n  MULTIPLE_CHOICE\n  FILL_IN_THE_BLANK\n  WRITE_CODE\n}\n",
+  "inlineSchemaHash": "0bf9dec82958e903399f3103fed451abbd294d0231194e3b8d027625a66da8f6",
   "copyEngine": true
 }
 config.dirname = '/'

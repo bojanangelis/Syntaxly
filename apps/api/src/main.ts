@@ -15,7 +15,7 @@ async function bootstrap() {
   const port = process.env.PORT || 4200;
   await app.listen(port, '0.0.0.0');
   Logger.log(
-    `🚀 Sintaxly playground api is running on http://localhost:${port}/graphiql`,
+    `🚀 Syntaxly playground API running at http://localhost:${port}/graphiql`,
   );
 }
 bootstrap();
